@@ -13,7 +13,7 @@ class IseedTest extends TestCase
     {
         parent::__construct();
 
-        static::$stubsDir = __DIR__.'/../src/Orangehill/Iseed/Stubs';
+        static::$stubsDir = __DIR__ . '/../src/SchuBu/Iseed/Stubs';
         static::$testStubsDir = __DIR__.'/Stubs';
     }
 
@@ -2085,7 +2085,7 @@ class IseedTest extends TestCase
             ],
         ];
 
-        $iSeed = new Orangehill\Iseed\Iseed();
+        $iSeed = new SchuBu\Iseed\Iseed();
         foreach ($testStubs as $key => $stub) {
             $output = $iSeed->populateStub('test_class', $productionStub, 'test_table', $stub['data'], 500);
             $this->assertEquals($stub['content'], $output, "Stub {$key} is not what it's expected to be.");
@@ -2101,10 +2101,10 @@ class IseedTest extends TestCase
 
     public function testTableNotFoundException()
     {
-        $this->expectException(\Orangehill\Iseed\TableNotFoundException::class);
+        $this->expectException(\SchuBu\Iseed\TableNotFoundException::class);
         $this->expectExceptionMessage('Table nonexisting was not found.');
 
-        $hasTable = m::mock('Orangehill\Iseed\Iseed[hasTable]')->makePartial();
+        $hasTable = m::mock('SchuBu\Iseed\Iseed[hasTable]')->makePartial();
         $hasTable->shouldReceive('hasTable')->once()->andReturn(false);
         $hasTable->generateSeed('nonexisting', null, null, 'database', 'numOfRows');
     }
@@ -2115,23 +2115,23 @@ class IseedTest extends TestCase
             ['id' => '1', 'name' => 'one'],
             ['id' => '2', 'name' => 'two'],
         ];
-        $iseed = new Orangehill\Iseed\Iseed();
+        $iseed = new SchuBu\Iseed\Iseed();
         $output = $iseed->repackSeedData($data);
         $this->assertEquals(json_encode($data), json_encode($output));
     }
 
     public function testCanGenerateClassName()
     {
-        $iseed = new Orangehill\Iseed\Iseed();
+        $iseed = new SchuBu\Iseed\Iseed();
         $output = $iseed->generateClassName('tablename');
         $this->assertEquals('TablenameTableSeeder', $output);
     }
 
     public function testCanGetStubPath()
     {
-        $iseed = new Orangehill\Iseed\Iseed();
+        $iseed = new SchuBu\Iseed\Iseed();
         $output = $iseed->getStubPath();
-        $expected = substr(__DIR__, 0, -5).'src'.DIRECTORY_SEPARATOR.'Orangehill'.DIRECTORY_SEPARATOR.'Iseed'.DIRECTORY_SEPARATOR.'Stubs';
+        $expected = substr(__DIR__, 0, -5).'src'.DIRECTORY_SEPARATOR.'SchuBu'.DIRECTORY_SEPARATOR.'Iseed'.DIRECTORY_SEPARATOR.'Stubs';
         $this->assertEquals($expected, $output);
     }
 
@@ -2139,10 +2139,10 @@ class IseedTest extends TestCase
     {
         $file = m::mock(\Illuminate\Filesystem\Filesystem::class)->makePartial();
         $composer = m::mock(\Illuminate\Support\Composer::class, [$file])->makePartial();
-        $mocked = m::mock(\Orangehill\Iseed\Iseed::class, [$file, $composer])->makePartial();
+        $mocked = m::mock(\SchuBu\Iseed\Iseed::class, [$file, $composer])->makePartial();
         $mocked->shouldReceive('readStubFile')
                ->once()
-               ->with(substr(__DIR__, 0, -5).'src'.DIRECTORY_SEPARATOR.'Orangehill'.DIRECTORY_SEPARATOR.'Iseed'.DIRECTORY_SEPARATOR.'Stubs'.DIRECTORY_SEPARATOR.'seed.stub');
+               ->with(substr(__DIR__, 0, -5).'src'.DIRECTORY_SEPARATOR.'SchuBu'.DIRECTORY_SEPARATOR.'Iseed'.DIRECTORY_SEPARATOR.'Stubs'.DIRECTORY_SEPARATOR.'seed.stub');
         $file->shouldReceive('put')->once()->with('seedPath', 'populatedStub');
         $mocked->shouldReceive('hasTable')->once()->andReturn(true);
         $mocked->shouldReceive('getData')->once()->andReturn([]);

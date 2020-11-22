@@ -1,12 +1,16 @@
 {
-    "name": "orangehill/iseed",
-    "description": "Generate a new Laravel database seed file based on data from the existing database table.",
+    "name": "schubu/iseed",
+    "description": "This is a fork of the original SchuBu/Iseed by Tihomir Opacic (tihomir.opacic@SchuBudev.com). Generate a new Laravel database seed file based on data from the existing database table.",
     "keywords": ["laravel", "generators", "seed", "artisan"],
     "license": "BSD-2-Clause",
     "authors": [
         {
+            "name": "Peter Schulze-Buxloh",
+            "email": "peter@schu-bu.de"
+        },
+        {
             "name": "Tihomir Opacic",
-            "email": "tihomir.opacic@orangehilldev.com"
+            "email": "tihomir.opacic@SchuBudev.com"
         }
     ],
     "require": {
@@ -21,21 +25,21 @@
     },
     "autoload": {
         "psr-0": {
-            "Orangehill\\Iseed": "src/"
+            "SchuBu\\Iseed": "src/"
         },
         "classmap": [
-            "src/Orangehill/Iseed/Exceptions.php"
+            "src/SchuBu/Iseed/Exceptions.php"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Orangehill\\Iseed\\Tests\\": "tests"
+            "SchuBu\\Iseed\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Orangehill\\Iseed\\IseedServiceProvider"
+                "SchuBu\\Iseed\\IseedServiceProvider"
             ]
         }
     },

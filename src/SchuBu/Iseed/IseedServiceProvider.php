@@ -46,6 +46,13 @@ class IseedServiceProvider extends ServiceProvider
         });
 
         $this->commands('command.iseed');
+
+
+        $this->app->singleton('command.iseed:all', function($app) {
+            return new IseedAllCommand;
+        });
+
+        $this->commands('command.iseed:all');
     }
 
     /**

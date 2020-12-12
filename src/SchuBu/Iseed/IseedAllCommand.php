@@ -1,4 +1,5 @@
 <?php
+
 namespace SchuBu\Iseed;
 
 use Illuminate\Console\Command;
@@ -17,8 +18,13 @@ class IseedAllCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command plugin for iseed to seed all databases except migrations table';
+    protected $description = 'Generate seed files for all tables except migrations';
 
+    /**
+     * Tables excluded.
+     *
+     * @var array
+     */
     protected $exclusions = [
         'migrations',
         'audits',
@@ -57,12 +63,18 @@ class IseedAllCommand extends Command
         $tables_array = explode(',', $tables);
         $allowed_tables = array_merge(array_diff($tables_array, $this->exclusions));
 
-        $this->info('Calling iseed for all tables except: ' . implode(', ', $this->exclusions));
+        $this->info(
+            'Calling iseed for all tables except: ' . implode(
+                ', ', $this->exclusions
+            )
+        );
 
-        $this->call('iseed', [
-            'tables' => implode(',', $allowed_tables),
-            '--force' => $this->option('force'),
-        ]);
+        $this->call(
+            'iseed', [
+                'tables' => implode(',', $allowed_tables),
+                '--force' => $this->option('force'),
+            ]
+        );
 
         return;
     }

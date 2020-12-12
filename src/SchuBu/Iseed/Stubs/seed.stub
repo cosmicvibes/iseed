@@ -1,12 +1,13 @@
 <?php
+
 namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class {{class}} extends Seeder
 {
-
     /**
-     * Auto generated seed file
+     * Auto generated seeder file.
      *
      * @return void
      */
@@ -16,7 +17,7 @@ class {{class}} extends Seeder
 
         \DB::table('{{table}}')->delete();
         {{insert_statements}}
-        
+
         {{postrun_event}}
     }
 }

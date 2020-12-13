@@ -27,7 +27,7 @@ return [
     'chunk_size' => 500,
 
     /**
-     * You may alternatively set an absolute path to a custom stub file
+     * You may alternatively set a relative path to a custom stub file
      * The default stub file is located in
      * /vendor/schubu/iseed/src/SchuBu/Iseed/Stubs/seed.stub
      *

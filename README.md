@@ -272,7 +272,7 @@ Maximum number of rows per insert statement.
 The default is `500`.
 
 ### stub_path
-You may alternatively set an absolute path to a custom stub file.
+You may alternatively set a relative path to a custom stub file. Make sure to make path relative to your project root, e.g. `'stub_path' => 'stubs/seeder.stub'` or `'stub_path' => './stubs/seeder.stub'` but **not** `'stub_path' => '/stubs/seeder.stub'`.
 
 The default stub file is located in `/vendor/schubu/iseed/src/SchuBu/Iseed/Stubs/seed.stub`
 

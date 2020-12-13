@@ -30,6 +30,9 @@ return [
      * You may alternatively set an absolute path to a custom stub file
      * The default stub file is located in
      * /vendor/schubu/iseed/src/SchuBu/Iseed/Stubs/seed.stub
+     *
+     * Make sure to make path relative to your project root:
+     * i.e. 'stubs/seeder.stub' not '/stubs/seeder.stub'!
      */
     'stub_path' => false,
 

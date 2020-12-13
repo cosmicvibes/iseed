@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class {{class}} extends Seeder
+class {{ class }} extends Seeder
 {
     /**
      * Auto generated seeder file.
@@ -13,11 +13,11 @@ class {{class}} extends Seeder
      */
     public function run()
     {
-        {{prerun_event}}
+        {{ prerun_event }}
 
-        \DB::table('{{table}}')->delete();
-        {{insert_statements}}
+        \DB::table('{{ table }}')->delete();
+        {{ insert_statements }}
 
-        {{postrun_event}}
+        {{ postrun_event }}
     }
 }

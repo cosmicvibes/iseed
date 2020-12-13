@@ -306,7 +306,7 @@ class Iseed
             );
         }
 
-        $stub = str_replace('{{class}}', $class, $stub);
+        $stub = str_replace('{{ class }}', $class, $stub);
 
         $prerunEventInsert = '';
         if ($prerunEvent) {
@@ -323,11 +323,11 @@ class Iseed
         }
 
         $stub = str_replace(
-            '{{prerun_event}}', $prerunEventInsert, $stub
+            '{{ prerun_event }}', $prerunEventInsert, $stub
         );
 
         if (!is_null($table)) {
-            $stub = str_replace('{{table}}', $table, $stub);
+            $stub = str_replace('{{ table }}', $table, $stub);
         }
 
         $postrunEventInsert = '';
@@ -345,10 +345,10 @@ class Iseed
         }
 
         $stub = str_replace(
-            '{{postrun_event}}', $postrunEventInsert, $stub
+            '{{ postrun_event }}', $postrunEventInsert, $stub
         );
 
-        $stub = str_replace('{{insert_statements}}', $inserts, $stub);
+        $stub = str_replace('{{ insert_statements }}', $inserts, $stub);
 
         return $stub;
     }

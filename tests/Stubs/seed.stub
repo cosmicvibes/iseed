@@ -1,12 +1,13 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class test_class extends Seeder
 {
-
     /**
-     * Auto generated seed file
+     * Auto generated seeder file.
      *
      * @return void
      */

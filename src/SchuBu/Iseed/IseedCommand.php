@@ -1,4 +1,5 @@
 <?php
+
 namespace SchuBu\Iseed;
 
 use Illuminate\Console\Command;
@@ -88,7 +89,9 @@ class IseedCommand extends Command
             $tableIncrement++;
 
             // generate file and class name based on name of the table
-            list($fileName, $className) = $this->generateFileName($table, $prefix, $suffix);
+            list($fileName, $className) = $this->generateFileName(
+                $table, $prefix, $suffix
+            );
 
             // if file does not exist or force option is turned on generate seeder
             if (!\File::exists($fileName) || $this->option('force')) {
@@ -113,7 +116,7 @@ class IseedCommand extends Command
                 continue;
             }
 
-            if ($this->confirm('File ' . $className . ' already exist. Do you wish to override it? [yes|no]')) {
+            if ($this->confirm('File '.$className.' already exist. Do you wish to override it? [yes|no]')) {
                 // if user said yes overwrite old seeder
                 $this->printResult(
                     app('iseed')->generateSeed(
@@ -145,7 +148,11 @@ class IseedCommand extends Command
     protected function getArguments()
     {
         return array(
-            array('tables', InputArgument::REQUIRED, 'comma separated string of table names'),
+            array(
+                'tables',
+                InputArgument::REQUIRED,
+                'comma separated string of table names'
+            ),
         );
     }
 
@@ -175,26 +182,32 @@ class IseedCommand extends Command
     }
 
     /**
-     * Provide user feedback, based on success or not.
+     * Provide user feedback based on success or not.
      *
-     * @param  boolean $successful
-     * @param  string $table
+     * @param boolean $successful Successful boolean
+     * @param string  $table      Table name
+     *
      * @return void
      */
     protected function printResult($successful, $table)
     {
         if ($successful) {
-            $this->info("Created a seed file from table {$table}");
+            $this->info("Created a seed file from {$table} table");
             return;
         }
 
-        $this->error("Could not create seed file from table {$table}");
+        $this->error("Could not create seed file from {$table} table");
     }
 
     /**
      * Generate file name, to be used in test wether seed file already exist
      *
-     * @param  string $table
+     * @param string $table  Table name
+     * @param string $prefix Seeder class prefix
+     * @param string $suffix Seeder class suffix
+     *
+     * @throws \SchuBu\Iseed\Exceptions\TableNotFoundException
+     *
      * @return string
      */
     protected function generateFileName($table, $prefix=null, $suffix=null)
@@ -205,7 +218,8 @@ class IseedCommand extends Command
 
         // Generate class name and file name
         $className = app('iseed')->generateClassName($table, $prefix, $suffix);
-        $seedPath = base_path() . config('iseed::config.path');
+        $seedPath = base_path() . config('iseed.path');
+
         return [$seedPath . '/' . $className . '.php', $className . '.php'];
     }
 }

@@ -1,8 +1,11 @@
 <?php
 
-namespace SchuBu\Iseed;
+namespace Cheesegrits\Iseed;
 
+use Commands\IseedAllCommand;
+use Commands\IseedCommand;
 use Illuminate\Support\ServiceProvider;
+use src\Facades\Iseed;
 
 class IseedServiceProvider extends ServiceProvider
 {
@@ -23,7 +26,7 @@ class IseedServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes(
                 [
-                    __DIR__.'/../../config/config.php' => config_path('iseed.php'),
+                    __DIR__.'/config/config.php' => config_path('iseed.php'),
                 ], 'config'
             );
         }
@@ -36,7 +39,7 @@ class IseedServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../../config/config.php', 'iseed');
+        $this->mergeConfigFrom(__DIR__.'/config/config.php', 'iseed');
 
         $this->app->singleton(
             'iseed', function ($app) {
@@ -47,7 +50,7 @@ class IseedServiceProvider extends ServiceProvider
         $this->app->booting(
             function () {
                 $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-                $loader->alias('Iseed', 'SchuBu\Iseed\Facades\Iseed');
+                $loader->alias('Iseed', 'src\Facades\Iseed');
             }
         );
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace SchuBu\Iseed;
+namespace Cheesegrits\Iseed;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Composer;
-use Illuminate\Support\Facades\Config;
+use src\TableNotFoundException;
 
 class Iseed
 {
@@ -81,7 +81,7 @@ class Iseed
      * @param int    $orderBy      Column to order by
      * @param string $direction    Default sort order
      *
-     * @throws SchuBu\Iseed\TableNotFoundException
+     * @throws Cheesegrits\Iseed\TableNotFoundException
      *
      * @return void
      */
@@ -265,7 +265,7 @@ class Iseed
      */
     public function getStubPath()
     {
-        return __DIR__ . DIRECTORY_SEPARATOR . 'stubs';
+        return __DIR__ . DIRECTORY_SEPARATOR . 'Stubs';
     }
 
     /**

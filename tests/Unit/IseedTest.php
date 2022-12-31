@@ -1,10 +1,16 @@
 <?php
+
+namespace Cheesegrits\Iseed\Tests\Unit;
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+use Cheesegrits;
 use Exceptions\TableNotFoundException;
 use Mockery as m;
-use PHPUnit\Framework\TestCase;
+use Cheesegrits\Iseed\Tests\TestCase;
+
+//use PHPUnit\Framework\TestCase;
 
 class IseedTest extends TestCase
 {
@@ -14,8 +20,8 @@ class IseedTest extends TestCase
     {
         parent::__construct();
 
-        static::$stubsDir = __DIR__ . '/../src/Stubs';
-        static::$testStubsDir = __DIR__.'/Stubs';
+        static::$stubsDir = __DIR__ . '/../../src/stubs';
+        static::$testStubsDir = __DIR__ . '/../stubs';
     }
 
     public function tearDown(): void
@@ -31,19 +37,19 @@ class IseedTest extends TestCase
         // Do your extra thing here
     }
 
-    public function testPopulatesStub()
+    public function test_that_it_can_populate_stub()
     {
         $composer = m::mock('Composer')->makePartial();
 
-        $productionStub = $this->readStubFile(static::$stubsDir.'/seed.stub');
+        $productionStub = $this->readStubFile(static::$stubsDir . '/seed.stub');
 
         $testStubs = [
             'blank' => [
-                'content' => $this->readStubFile(static::$testStubsDir.'/seed_blank.stub'),
+                'content' => $this->readStubFile(static::$testStubsDir . '/seed_blank.stub'),
                 'data' => [],
             ],
             'entries_5' => [
-                'content' => $this->readStubFile(static::$testStubsDir.'/seed_5.stub'),
+                'content' => $this->readStubFile(static::$testStubsDir . '/seed_5.stub'),
                 'data' => [
                     [
                         'id' => '1',
@@ -68,7 +74,7 @@ class IseedTest extends TestCase
                 ],
             ],
             'entries_505' => [
-                'content' => $this->readStubFile(static::$testStubsDir.'/seed_505.stub'),
+                'content' => $this->readStubFile(static::$testStubsDir . '/seed_505.stub'),
                 'data' => [
                     [
                         'id' => '1',
@@ -2108,7 +2114,7 @@ class IseedTest extends TestCase
         return implode(PHP_EOL, $buffer);
     }
 
-    public function testTableNotFoundException()
+    public function test_table_not_found_exception()
     {
         $this->expectException(TableNotFoundException::class);
         $this->expectExceptionMessage('Table nonexisting was not found.');
@@ -2118,7 +2124,7 @@ class IseedTest extends TestCase
         $hasTable->generateSeed('nonexisting', null, null, 'database', 'numOfRows');
     }
 
-    public function testRepacksSeedData()
+    public function test_repack_seed_data()
     {
         $data = [
             ['id' => '1', 'name' => 'one'],
@@ -2129,29 +2135,29 @@ class IseedTest extends TestCase
         $this->assertEquals(json_encode($data), json_encode($output));
     }
 
-    public function testCanGenerateClassName()
+    public function test_can_generate_class_name()
     {
-	    $iseed = new Cheesegrits\Iseed\Iseed();
+        $iseed = new Cheesegrits\Iseed\Iseed();
         $output = $iseed->generateClassName('tablename');
         $this->assertEquals('TablenameTableSeeder', $output);
     }
 
-    public function testCanGetStubPath()
+    public function test_can_get_stub_path()
     {
-	    $iseed = new Cheesegrits\Iseed\Iseed();
+        $iseed = new Cheesegrits\Iseed\Iseed();
         $output = $iseed->getStubPath();
-        $expected = substr(__DIR__, 0, -5).'src'.DIRECTORY_SEPARATOR.'cheesegrits'.DIRECTORY_SEPARATOR.'Iseed'.DIRECTORY_SEPARATOR.'Stubs';
+        $expected = substr(__DIR__, 0, -5) . 'src' . DIRECTORY_SEPARATOR . 'cheesegrits' . DIRECTORY_SEPARATOR . 'Iseed' . DIRECTORY_SEPARATOR . 'Stubs';
         $this->assertEquals($expected, $output);
     }
 
-    public function testCanGenerateSeed()
+    public function test_can_generate_seed()
     {
         $file = m::mock(\Illuminate\Filesystem\Filesystem::class)->makePartial();
         $composer = m::mock(\Illuminate\Support\Composer::class, [$file])->makePartial();
         $mocked = m::mock(\Cheesegrits\Iseed\Iseed::class, [$file, $composer])->makePartial();
         $mocked->shouldReceive('readStubFile')
-               ->once()
-               ->with(substr(__DIR__, 0, -5).'src'.DIRECTORY_SEPARATOR.'cheesegrits'.DIRECTORY_SEPARATOR.'Iseed'.DIRECTORY_SEPARATOR.'Stubs'.DIRECTORY_SEPARATOR.'seed.stub');
+            ->once()
+            ->with(substr(__DIR__, 0, -5) . 'src' . DIRECTORY_SEPARATOR . 'cheesegrits' . DIRECTORY_SEPARATOR . 'Iseed' . DIRECTORY_SEPARATOR . 'Stubs' . DIRECTORY_SEPARATOR . 'seed.stub');
         $file->shouldReceive('put')->once()->with('seedPath', 'populatedStub');
         $mocked->shouldReceive('hasTable')->once()->andReturn(true);
         $mocked->shouldReceive('getData')->once()->andReturn([]);

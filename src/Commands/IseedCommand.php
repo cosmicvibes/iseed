@@ -1,10 +1,14 @@
 <?php
 
-namespace SchuBu\Iseed;
+namespace Cheesegrits\Iseed\Commands;
 
 use Illuminate\Console\Command;
+use src\TableNotFoundException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+//use function Cheesegrits\Iseed\app;
+//use function Cheesegrits\Iseed\base_path;
+//use function Cheesegrits\Iseed\config;
 
 class IseedCommand extends Command
 {
@@ -25,7 +29,7 @@ class IseedCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @return \SchuBu\Iseed\IseedCommand
+     * @return \Cheesegrits\Iseed\IseedCommand
      */
     public function __construct()
     {
@@ -206,7 +210,7 @@ class IseedCommand extends Command
      * @param string $prefix Seeder class prefix
      * @param string $suffix Seeder class suffix
      *
-     * @throws \SchuBu\Iseed\Exceptions\TableNotFoundException
+     * @throws \Cheesegrits\Iseed\Exceptions\TableNotFoundException
      *
      * @return string
      */

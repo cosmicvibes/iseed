@@ -1,6 +1,6 @@
 <?php
 
-namespace SchuBu\Iseed;
+namespace Exceptions;
 
 class TableNotFoundException extends \RuntimeException
 {

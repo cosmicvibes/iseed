@@ -1,6 +1,6 @@
 <?php
 
-namespace SchuBu\Iseed\Facades;
+namespace src\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

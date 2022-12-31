@@ -1,8 +1,9 @@
 <?php
 
-namespace SchuBu\Iseed;
+namespace Commands;
 
 use Illuminate\Console\Command;
+use function Cheesegrits\Iseed\env;
 
 class IseedAllCommand extends Command
 {

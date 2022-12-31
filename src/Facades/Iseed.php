@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Facades;
+namespace Cheesegrits\Iseed\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

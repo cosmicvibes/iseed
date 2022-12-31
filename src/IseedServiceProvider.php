@@ -2,10 +2,9 @@
 
 namespace Cheesegrits\Iseed;
 
-use Commands\IseedAllCommand;
-use Commands\IseedCommand;
+use Cheesegrits\Iseed\Commands\IseedAllCommand;
+use Cheesegrits\Iseed\Commands\IseedCommand;
 use Illuminate\Support\ServiceProvider;
-use src\Facades\Iseed;
 
 class IseedServiceProvider extends ServiceProvider
 {
@@ -50,7 +49,7 @@ class IseedServiceProvider extends ServiceProvider
         $this->app->booting(
             function () {
                 $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-                $loader->alias('Iseed', 'src\Facades\Iseed');
+                $loader->alias('Iseed', 'Cheesgrits\Iseed\Facades\Iseed');
             }
         );
 

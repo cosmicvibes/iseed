@@ -1,6 +1,6 @@
 <?php
 
-namespace Commands;
+namespace Cheesegrits\Iseed\Commands;
 
 use Illuminate\Console\Command;
 use function Cheesegrits\Iseed\env;

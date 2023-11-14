@@ -306,6 +306,8 @@ class Iseed
             );
         }
 
+        $namespace = implode('\\', array_filter(array_map('ucfirst', explode('/', config('iseed.path')))));
+        $stub      = str_replace('{{ namespace }}', $namespace, $stub);
         $stub = str_replace('{{ class }}', $class, $stub);
 
         $prerunEventInsert = '';
